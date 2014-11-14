@@ -1,0 +1,1 @@
+angular.module('shgaApp.factories', ['shgaApp.factory.Profile', 'shgaApp.factory.Event', 'shgaApp.factory.Golfer', 'shgaApp.factory.Registration']);
