@@ -1,60 +1,398 @@
 <!doctype html>
-<html ng-app="medica.surgica.smartcard">
+<html>
 <head>
+<title>Test</title>
+<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
 <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
-<link rel="stylesheet" href="vendor/angular-mobile-ui/css/mobile-angular-ui-hover.css" />
-<link rel="stylesheet" href="vendor/angular-mobile-ui/css/mobile-angular-ui-base.css" />
-<link rel="stylesheet" href="vendor/angular-mobile-ui/css/mobile-angular-ui-desktop.css" />
-<link rel="stylesheet" href="css/app.css">
-<link rel="stylesheet" href="css/app-mobile.css">
+<link rel="stylesheet" href="vendor/semantic-ui/css/semantic.min.css">
+<link rel="stylesheet" href="css/hb.css">
 <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
 <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.min.js"></script>
 <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-touch.min.js"></script>
 <script type='text/javascript' src="https://cdn.firebase.com/js/client/1.1.1/firebase.js"></script>
 <script type='text/javascript' src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
-<script type='text/javascript' src="vendor/angular-mobile-ui/js/mobile-angular-ui.js"></script>
-<script type='text/javascript' src="vendor/angular-ui-bootstrap/ui-bootstrap-tpls-0.11.2.min.js"></script>
-<script type='text/javascript' src="vendor/momentjs/moment.js"></script>
-<script type='text/javascript' src="js/app.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type='text/javascript' src="vendor/semantic-ui/js/semantic.min.js"></script>
 </head>
-<body ng-controller="EventController">
-	<div ng-include="'partial/sidebar.html'" track-as-search-param='true' class="sidebar sidebar-left"></div>
-	<div ng-include="'partial/sidebarRight.html'" class="sidebar sidebar-right"></div>
-	<div class="app">
-		<!-- Navbars -->
-		<div class="navbar navbar-app navbar-absolute-top">
-			<div class="navbar-brand navbar-brand-center" yield-to="title">SHGA</div>
-			<div class="btn-group pull-left">
-				<div ui-toggle="sidebarLeft" class="btn sidebar-toggle">
-					<i class="fa fa-bars"></i> Menu
+<body>
+	<div class="hb-app" id="smartcard_viewer_searchbar">
+		<div class="ui form">
+			<div class="three fields">
+				<div class="inline field">
+					<label>Procedure: </label> <input type="text" placeholder="Procedure">
+				</div>
+				<div class="inline field">
+					<label>Procedure Category: </label> <input type="text" placeholder="Procedure Category">
+				</div>
+				<div class="inline field">
+					<label>Surgeon: </label> <input type="text" placeholder="Surgeon">
 				</div>
 			</div>
-			<div class="btn-group pull-right" yield-to="navbarAction">
-				<a ng-show="!isAuth" class="btn btn-navbar" href="#/login">Sign In</a>
-				<a ng-show="isAuth" class="btn btn-navbar" ng-click="logout()">Logout</a>
-			</div>
-		</div>
-		<div class="navbar navbar-app navbar-absolute-bottom">
-			<div class="btn-group justified">
-				<a href="http://www.ghin.com/scoreposting.aspx" target="_blank" class="btn btn-navbar"><i class="fa fa-home fa-navbar"></i> Post Scores</a> <a href="http://www.ghin.com/lookup.aspx" target="_blank" class="btn btn-navbar"><i class="fa fa-exclamation-circle fa-navbar"></i> HCP Lookup</a>
-			</div>
-		</div>
-		<!-- App Body -->
-		<div class="app-body" ng-class="{loading: loading}">
-			<div ng-show="loading" class="app-content-loading">
-				<i class="fa fa-spinner fa-spin loading-spinner"></i>
-			</div>
-
-			<ng-view class="app-content" ng-hide="loading"></ng-view>
 		</div>
 	</div>
-	<!-- ~ .app -->
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="vendor/bootstrap/bootstrap.js"></script>
+	<div class="hb-app" id="smartcard_viewer">
+		<div class="text example">
+			<div class="ui items">
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Appendectomy : Mueller : APP</div>
+						<p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+					</div>
+					<div class="extra">199 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Faithful Dog</div>
+						<p class="description">Sometimes its more important to have a dog you know you can trust. But not every dog is trustworthy, you can tell by looking at its smile.</p>
+					</div>
+					<div class="extra">311 votes</div>
+				</div>
+				<div class="item smartcard">
+					<div class="content">
+						<div class="name">Silly Dog</div>
+						<p class="description">Silly dogs can be quite fun to have as companions. You never know what kind of ridiculous thing they will do.</p>
+					</div>
+					<div class="extra">522 votes</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="12 ui icon buttons" id="smartcard_tray">
+		<div class="ui button">
+			<i class="tag icon"></i>
+		</div>
+		<div class="ui button">
+			<i class="tags icon"></i>
+		</div>
+		<div class="ui button">
+			<i class="tasks icon"></i>
+		</div>
+		<div class="ui button">
+			<i class="terminal icon"></i>
+		</div>
+		<div class="ui button">
+			<i class="text file icon"></i>
+		</div>
+		<div class="ui button">
+			<i class="text file outline icon"></i>
+		</div>
+		<div class="ui button">
+			<i class="time icon"></i>
+		</div>
+		<div class="ui button">
+			<i class="trash icon"></i>
+		</div>
+		<div class="ui button">
+			<i class="url icon"></i>
+		</div>
+		<div class="ui button">
+			<i class="users icon" title="Surgeons"></i>
+		</div>
+		<div class="ui button">
+			<i class="users icon"></i>
+		</div>
+		<div class="ui button">
+			<i class="video icon"></i>
+		</div>
+	</div>
+
+	<div class="hb-app" id="smartcard_info_window"></div>
 </body>
 </html>

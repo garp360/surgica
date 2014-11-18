@@ -1,0 +1,102 @@
+/* Halobyte ========================================================================== */
+html,body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	font-size: 15px;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	overflow: hidden;
+}
+
+body {
+	/* 	background: rgba(226, 226, 226, 1); */
+	/* 	background: -moz-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(219, 219, 219, 1) 50%, rgba(209, 209, 209, 1) 51%, rgba(254, 254, 254, 1) 100%); */
+	/* 	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(226, 226, 226, 1)), color-stop(50%, rgba(219, 219, 219, 1)), color-stop(51%, rgba(209, 209, 209, 1)), color-stop(100%, rgba(254, 254, 254, 1))); */
+	/* 	background: -webkit-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(219, 219, 219, 1) 50%, rgba(209, 209, 209, 1) 51%, rgba(254, 254, 254, 1) 100%); */
+	/* 	background: -o-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(219, 219, 219, 1) 50%, rgba(209, 209, 209, 1) 51%, rgba(254, 254, 254, 1) 100%); */
+	/* 	background: -ms-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(219, 219, 219, 1) 50%, rgba(209, 209, 209, 1) 51%, rgba(254, 254, 254, 1) 100%); */
+	/* 	background: linear-gradient(to bottom, rgba(226, 226, 226, 1) 0%, rgba(219, 219, 219, 1) 50%, rgba(209, 209, 209, 1) 51%, rgba(254, 254, 254, 1) 100%); */
+	/* 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=0); */
+	background: rgba(58, 133, 199, 1);
+	background: -moz-linear-gradient(top, rgba(58, 133, 199, 1) 0%, rgba(25, 53, 82, 1) 26%, rgba(25, 53, 82, 1) 73%, rgba(50, 114, 179, 1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(58, 133, 199, 1)), color-stop(26%, rgba(25, 53, 82, 1)), color-stop(73%, rgba(25, 53, 82, 1)), color-stop(100%, rgba(50, 114, 179, 1)));
+	background: -webkit-linear-gradient(top, rgba(58, 133, 199, 1) 0%, rgba(25, 53, 82, 1) 26%, rgba(25, 53, 82, 1) 73%, rgba(50, 114, 179, 1) 100%);
+	background: -o-linear-gradient(top, rgba(58, 133, 199, 1) 0%, rgba(25, 53, 82, 1) 26%, rgba(25, 53, 82, 1) 73%, rgba(50, 114, 179, 1) 100%);
+	background: -ms-linear-gradient(top, rgba(58, 133, 199, 1) 0%, rgba(25, 53, 82, 1) 26%, rgba(25, 53, 82, 1) 73%, rgba(50, 114, 179, 1) 100%);
+	background: linear-gradient(to bottom, rgba(58, 133, 199, 1) 0%, rgba(25, 53, 82, 1) 26%, rgba(25, 53, 82, 1) 73%, rgba(50, 114, 179, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a85c7', endColorstr='#3272b3', GradientType=0);
+}
+
+DIV.hb-app {
+	position: absolute;
+	padding: 10px;
+	background-color: #FFFFFF;
+	overflow: auto;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	outline: none;
+	color: rgba(0, 0, 0, 0.7);
+	border-radius: 0.3125em;
+	-webkit-transition: background-color 0.3s ease-out, -webkit-box-shadow 0.2s ease, border-color 0.2s ease;
+	-moz-transition: background-color 0.3s ease-out, box-shadow 0.2s ease, border-color 0.2s ease;
+	transition: background-color 0.3s ease-out, box-shadow 0.2s ease, border-color 0.2s ease;
+	-webkit-box-shadow: 0em 0em 0em 0em rgba(0, 0, 0, 0.3) inset;
+	box-shadow: 0em 0em 0em 0em rgba(0, 0, 0, 0.3) inset;
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#smartcard_viewer {
+	top: 143px;
+	left: 8px;
+	bottom: 60px;
+	right: 8px;
+	padding-right: 400px;
+}
+
+#smartcard_tray {
+	position: absolute;
+	bottom: 15px;
+	left: 8px;
+}
+
+#smartcard_info_window {
+	width: 390px;
+	right: 32px;
+	top: 153px;
+	bottom: 72px;
+	background: rgba(250, 246, 203, 1);
+	background: -moz-linear-gradient(top, rgba(250, 246, 203, 1) 0%, rgba(250, 238, 177, 1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(250, 246, 203, 1)), color-stop(100%, rgba(250, 238, 177, 1)));
+	background: -webkit-linear-gradient(top, rgba(250, 246, 203, 1) 0%, rgba(250, 238, 177, 1) 100%);
+	background: -o-linear-gradient(top, rgba(250, 246, 203, 1) 0%, rgba(250, 238, 177, 1) 100%);
+	background: -ms-linear-gradient(top, rgba(250, 246, 203, 1) 0%, rgba(250, 238, 177, 1) 100%);
+	background: linear-gradient(to bottom, rgba(250, 246, 203, 1) 0%, rgba(250, 238, 177, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faf6cb', endColorstr='#faeeb1', GradientType=0);
+	background: rgba(250, 246, 203, 1);
+}
+
+#smartcard_viewer_searchbar {
+	top: 80px;
+	left: 8px;
+	right: 8px;
+	height: 60px;
+	padding-right: 400px;
+	overflow: hidden;
+	background: rgba(224, 224, 224, 1);
+	background: -moz-linear-gradient(top, rgba(224, 224, 224, 1) 0%, rgba(204, 204, 204, 1) 9%, rgba(207, 207, 207, 1) 90%, rgba(224, 224, 224, 1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(224, 224, 224, 1)), color-stop(9%, rgba(204, 204, 204, 1)), color-stop(90%, rgba(207, 207, 207, 1)), color-stop(100%, rgba(224, 224, 224, 1)));
+	background: -webkit-linear-gradient(top, rgba(224, 224, 224, 1) 0%, rgba(204, 204, 204, 1) 9%, rgba(207, 207, 207, 1) 90%, rgba(224, 224, 224, 1) 100%);
+	background: -o-linear-gradient(top, rgba(224, 224, 224, 1) 0%, rgba(204, 204, 204, 1) 9%, rgba(207, 207, 207, 1) 90%, rgba(224, 224, 224, 1) 100%);
+	background: -ms-linear-gradient(top, rgba(224, 224, 224, 1) 0%, rgba(204, 204, 204, 1) 9%, rgba(207, 207, 207, 1) 90%, rgba(224, 224, 224, 1) 100%);
+	background: linear-gradient(to bottom, rgba(224, 224, 224, 1) 0%, rgba(204, 204, 204, 1) 9%, rgba(207, 207, 207, 1) 90%, rgba(224, 224, 224, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', endColorstr='#e0e0e0', GradientType=0);
+}
+
+.ui.items>.item,.ui.items>.row>.item {
+	min-height: 110px;
+	font-size: 0.85em;
+}
