@@ -2,14 +2,19 @@
 	<div class="ui small form">
 		<div class="inline fields">
 			<div class="field">
-				<label>Procedure:</label> <input ng-model="pxCriteria" placeholder="Procedure" type="text">
+				<label>Procedure:</label> <input ng-model="pxCriteria" type="text">
 			</div>
 			<div class="field">
-				<label>Procedure Category: </label> <input ng-model="pxCategory" placeholder="Procedure Category" type="text">
+				<label>Procedure Category: </label> <input ng-model="pxCategory" type="text">
 			</div>
 			<div class="field">
 				<label>Surgeon: </label>
-				<select ng-model="pxSurgeon" ng-options="fullName(surgeon) for surgeon in surgeons"></select>
+				<select ng-model="pxSurgeon" placeholder="Surgeon" ng-options="fullName(surgeon) for surgeon in surgeons">
+					<option></option>
+				</select>
+			</div>
+			<div class="field">
+				<button ng-click="clearSearch()">Clear</button>
 			</div>
 		</div>
 	</div>
@@ -19,7 +24,7 @@
 		<div class="item smartcard" ng-click="showInfo(smartcard)" ng-repeat="smartcard in smartcards | smartCardFilter:pxCriteria:pxCategory:pxSurgeon">
 			<div class="content">
 				<div class="name">{{title(smartcard)}}</div>
-				<p class="description">{{smartcard.category}}</p>
+				<p class="description">{{fullName(smartcard.surgeon)}}</p>
 			</div>
 			<div class="extra">{{smartcard.category}}</div>
 		</div>
@@ -32,7 +37,7 @@
 		<dt>CATEGORY</dt>
 		<dd>{{selectedSmartcard.category}}</dd>
 		<dt>SURGEON</dt>
-		<dd>{{selectedSmartcard.surgeon}}</dd>
+		<dd>{{fullName(selectedSmartcard.surgeon)}}</dd>
 	</dl>
 </div>
 <div class="12 ui small icon buttons" id="smartcard_tray">

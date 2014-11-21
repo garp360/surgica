@@ -9,20 +9,28 @@ angular.module('hb.smartcard.controller.SmartCard', [])
 	$scope.smartcards = SmartCardFactory.findAll();
 	$scope.surgeons = SurgeonFactory.findAll();
 	
-	$scope.pxSurgeon = $scope.surgeons[0];
-	
 	$scope.title = function(smartcard) {
 		return smartcard.procedure;
 	};
 	
 	$scope.fullName = function(surgeon) {
-		var fullName =  surgeon.lastName + ", " + surgeon.firstName;
-		var middleInitial = surgeon.middleInitial == null ? "" : surgeon.middleInitial + "."
-		if(middleInitial != null && middleInitial.length > 0) {
-			fullName = fullName + " " + middleInitial;
-		}
+		var surgeonName = "Generic";
 		
-		return fullName;
+		if(surgeon != null) {
+			surgeonName =  surgeon.lastName + ", " + surgeon.firstName;
+			var middleInitial = surgeon.middleInitial == null ? "" : surgeon.middleInitial + ".";
+			if(middleInitial != null && middleInitial.length > 0) {
+				surgeonName = surgeonName + " " + middleInitial;
+			}
+		}
+		return surgeonName;
+	};
+	
+	$scope.clearSearch = function() {
+		$scope.pxCriteria = null;
+		$scope.pxCategory = null;
+		$scope.pxSurgeon = null;
+		$scope.infoWindowIsShowing = false;
 	};
 	
 	$scope.showInfo = function(smartcard) {
@@ -30,24 +38,12 @@ angular.module('hb.smartcard.controller.SmartCard', [])
 		$scope.selectedSmartcard = angular.copy(smartcard);
 	};
 	
-	$scope.$watch('pxCriteria', function(newValue, oldValue) {
-        var x = $filter('smartCardFilter')($scope.smartcards, $scope.pxCriteria);
-        if(x== null || x.length == 0) {
+	
+	$scope.$watchGroup(['pxCriteria', 'pxCategory', 'pxSurgeon'], function(newValues, oldValues, scope) {
+		var x = $filter('smartCardFilter')($scope.smartcards, $scope.pxCriteria, $scope.pxCategory, $scope.pxSurgeon, null);
+		if(x== null || x.length == 0) {
         	$scope.infoWindowIsShowing = false;
         }
 	});
 	
-	$scope.$watch('pxCategory', function(newValue, oldValue) {
-		var x = $filter('smartCardFilter')($scope.smartcards, $scope.pxCategory);
-		if(x== null || x.length == 0) {
-			$scope.infoWindowIsShowing = false;
-		}
-	});
-	
-	$scope.$watch('pxSurgeon', function(newValue, oldValue) {
-		var x = $filter('smartCardFilter')($scope.smartcards, $scope.pxSurgeon);
-		if(x== null || x.length == 0) {
-			$scope.infoWindowIsShowing = false;
-		}
-	});
 }]);

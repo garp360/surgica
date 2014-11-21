@@ -7,3 +7,5 @@ app.config(function($routeProvider) {
 		reloadOnSearch : false
 	});
 });
+
+$('.ui.dropdown').dropdown();
