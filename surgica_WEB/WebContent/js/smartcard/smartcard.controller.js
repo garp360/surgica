@@ -1,6 +1,6 @@
 angular.module('hb.smartcard.controller.SmartCard', [])
 
-.controller("SmartCardViewer", [ "$rootScope", "$scope", "$filter", "$firebase", "$log", "$location", "SmartCardFactory", "SurgeonFactory", function($rootScope, $scope, $filter, $firebase, $log, $location, SmartCardFactory, SurgeonFactory) {
+.controller("SmartCardViewer", [ "$rootScope", "$scope", "$filter", "$firebase", "$log", "$location", "SmartCardFactory", "SurgeonFactory", "ProcedureFactory", function($rootScope, $scope, $filter, $firebase, $log, $location, SmartCardFactory, SurgeonFactory, ProcedureFactory) {
 	$scope.isloaded = false;
 	$scope.defaultWidth = '0px';
 	$scope.gutterWidth = '400px';
@@ -8,6 +8,9 @@ angular.module('hb.smartcard.controller.SmartCard', [])
 	$scope.selectedSmartcard = {};
 	$scope.smartcards = SmartCardFactory.findAll();
 	$scope.surgeons = SurgeonFactory.findAll();
+	$scope.procedures = ProcedureFactory.findAll();
+	$scope.procedureCategories = ProcedureFactory.findAllCategories();
+	
 	
 	$scope.title = function(smartcard) {
 		return smartcard.procedure;

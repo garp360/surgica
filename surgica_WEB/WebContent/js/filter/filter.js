@@ -36,7 +36,22 @@ angular.module('hb.smartcard.filters', [])
 		};
 		
 		for (var i = 0; i < smartcards.length; i++) {
-			if (_isMatch(smartcards[i].procedure, procedure) || _isMatch(smartcards[i].category, category) || (smartcards[i].surgeon != null && surgeon != null && _isMatch(smartcards[i].surgeon.pid, surgeon.pid))) {
+			
+			var match = false;
+			
+			if(smartcards[i].procedure != null && procedure != null) {
+				match = match || _isMatch(smartcards[i].procedure, procedure.name);
+			}
+			
+			if(smartcards[i].category != null && category != null) {
+				match = match || _isMatch(smartcards[i].category, category.name);
+			}
+			
+			if(smartcards[i].surgeon!= null && surgeon != null) {
+				match = match || _isMatch(smartcards[i].surgeon.pid, surgeon.pid);
+			}
+			
+			if (match) {
 				filteredList.push(smartcards[i]);
 			}
 		}

@@ -2,16 +2,16 @@
 	<div class="ui small form">
 		<div class="inline fields">
 			<div class="field">
-				<label>Procedure:</label> <input ng-model="pxCriteria" type="text">
+				<label>Procedure:</label>
+				<select ng-model="pxCriteria" ng-options="procedure.name for procedure in procedures"></select>
 			</div>
 			<div class="field">
-				<label>Procedure Category: </label> <input ng-model="pxCategory" type="text">
+				<label>Procedure Category: </label>
+				<select ng-model="pxCategory" ng-options="category.name for category in procedureCategories"></select>
 			</div>
 			<div class="field">
 				<label>Surgeon: </label>
-				<select ng-model="pxSurgeon" placeholder="Surgeon" ng-options="fullName(surgeon) for surgeon in surgeons">
-					<option></option>
-				</select>
+				<select ng-model="pxSurgeon" ng-options="fullName(surgeon) for surgeon in surgeons"></select>
 			</div>
 			<div class="field">
 				<button ng-click="clearSearch()">Clear</button>
