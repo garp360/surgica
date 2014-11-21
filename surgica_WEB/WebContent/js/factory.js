@@ -1,0 +1,1 @@
+angular.module('hb.smartcard.factories', ['hb.smartcard.factory.SmartCard', 'hb.smartcard.factory.Surgeon', 'hb.smartcard.factory.SurgeonSpecialty']);

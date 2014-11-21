@@ -1,0 +1,1 @@
+angular.module('hb.smartcard.controllers', ['hb.smartcard.controller.SmartCard']);

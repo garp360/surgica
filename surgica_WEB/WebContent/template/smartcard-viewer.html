@@ -1,0 +1,75 @@
+<div class="hb-app" id="smartcard_viewer_searchbar">
+	<div class="ui small form">
+		<div class="inline fields">
+			<div class="field">
+				<label>Procedure:</label> <input ng-model="pxCriteria" placeholder="Procedure" type="text">
+			</div>
+			<div class="field">
+				<label>Procedure Category: </label> <input ng-model="pxCategory" placeholder="Procedure Category" type="text">
+			</div>
+			<div class="field">
+				<label>Surgeon: </label>
+				<select ng-model="pxSurgeon" ng-options="fullName(surgeon) for surgeon in surgeons"></select>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="hb-app" right-gutter id="smartcard_viewer" >
+	<div class="ui items">
+		<div class="item smartcard" ng-click="showInfo(smartcard)" ng-repeat="smartcard in smartcards | smartCardFilter:pxCriteria:pxCategory:pxSurgeon">
+			<div class="content">
+				<div class="name">{{title(smartcard)}}</div>
+				<p class="description">{{smartcard.category}}</p>
+			</div>
+			<div class="extra">{{smartcard.category}}</div>
+		</div>
+	</div>
+</div>
+<div info-window class="hb-app" id="smartcard_info_window">
+	<dl>
+		<dt>PROCEDURE</dt>
+		<dd>{{selectedSmartcard.procedure}}</dd>
+		<dt>CATEGORY</dt>
+		<dd>{{selectedSmartcard.category}}</dd>
+		<dt>SURGEON</dt>
+		<dd>{{selectedSmartcard.surgeon}}</dd>
+	</dl>
+</div>
+<div class="12 ui small icon buttons" id="smartcard_tray">
+	<div class="ui button" title="New Surgeon">
+		<i class="plus icon"></i>
+	</div>
+	<div class="ui button">
+		<i class="tags icon"></i>
+	</div>
+	<div class="ui button">
+		<i class="tasks icon"></i>
+	</div>
+	<div class="ui button">
+		<i class="terminal icon"></i>
+	</div>
+	<div class="ui button">
+		<i class="text file icon"></i>
+	</div>
+	<div class="ui button">
+		<i class="text file outline icon"></i>
+	</div>
+	<div class="ui button">
+		<i class="time icon"></i>
+	</div>
+	<div class="ui button">
+		<i class="trash icon"></i>
+	</div>
+	<div class="ui button">
+		<i class="url icon"></i>
+	</div>
+	<div class="ui button">
+		<i class="users icon" title="Surgeons"></i>
+	</div>
+	<div class="ui button">
+		<i class="users icon"></i>
+	</div>
+	<div class="ui button">
+		<i class="video icon"></i>
+	</div>
+</div>
