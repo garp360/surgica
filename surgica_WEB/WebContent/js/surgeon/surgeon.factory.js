@@ -3,6 +3,7 @@ angular.module('hb.smartcard.factory.Surgeon', [])
 .factory('SurgeonFactory', function ( $firebase , $q , $log, $timeout )
 {
 	var factory = {};
+	var ref = new Firebase("https://surgica.firebaseio.com/personnel/staff/");
 	
 	var surgeons = [
 		{ firstName: "Jeffery", lastName: "Thompson", middleInitial: "M", username: "aeB0AF0anai", pid: "18a7f5d9-0ad5-4649-8a5f-fa2da825c00b"},
@@ -406,14 +407,52 @@ angular.module('hb.smartcard.factory.Surgeon', [])
 		{ firstName: "Jerry", lastName: "Weiss", middleInitial: "D", username: "io4naiHae", pid: "d14e5768-d3e0-4cb6-b56b-0e1b9cb99ab8"},
 		{ firstName: "Harold", lastName: "Radtke", middleInitial: "C", username: "kaePai8Oos", pid: "598807d4-bfb3-4f32-b806-5b451cba73b4"}];
 	
+//	factory.initialize = function initialize() {
+//		
+//		for(var i=0; i<surgeons.length; i++) {
+//			var id = "sx:" + i;
+//			px = {
+//				id : id,
+//				firstName : surgeons[i].firstName,
+//				lastName : surgeons[i].lastName,
+//				middleInitial : surgeons[i].middleInitial,
+//				username : surgeons[i].username,
+//				pid : surgeons[i].pid,
+//				dob : moment().toJSON(),
+//				ssNumber : "XXX-XX-XXXX",
+//				title : "XXX",
+//				contactInfo : {
+//					phone : {
+//						primary : {
+//							number : "3333333333",
+//							ext : "none"
+//						}
+//					}, 
+//					email : {
+//						primary : "XXX@XX.XXX"
+//					}
+//				},
+//				address : {
+//					primary : {
+//						street1: "XXX",
+//						street2: "XXX",
+//						street3: "XXX",
+//						city: "XXX",
+//						state: "XXX",
+//						country : "XXX",
+//						zip: "XXX",
+//					}
+//				},
+//				modified : moment().toJSON(),
+//				modifiedBy : "APP",
+//			};
+//			ref.child('surgeons').child(id).set(angular.fromJson(px));
+//		}
+//	};
+	
 	factory.findAll = function findAll() 
 	{
-		var comparator = function(a,b) {
-			var x = a.lastName.toLowerCase()+"."+a.firstName.toLowerCase()+"."+a.middleInitial.toLowerCase(), y = b.lastName.toLowerCase()+"."+b.firstName.toLowerCase()+"."+b.middleInitial.toLowerCase();
-		    
-		    return x < y ? -1 : x > y ? 1 : 0;
-		};
-		return surgeons.sort(comparator);
+		return surgeons;
 	};
 	
 	return factory;

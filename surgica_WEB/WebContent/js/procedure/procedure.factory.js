@@ -3,7 +3,9 @@ angular.module('hb.smartcard.factory.Procedure', [])
 .factory('ProcedureFactory', function ( $firebase , $q , $log, $timeout )
 {
 	var factory = {};
-	
+	var ref = new Firebase("https://surgica.firebaseio.com/procedure/");
+		
+		
 	var procedures = [
       { category: "CNS", name: "Decompressive Craniectomy" },
       { category: "CNS", name: "Hemispherectomy" },
@@ -21,7 +23,7 @@ angular.module('hb.smartcard.factory.Procedure', [])
       { category: "CNS", name: "Psychosurgery" },
       { category: "CNS", name: "Brain Biopsy" },
       { category: "PNS", name: "Ganglionectomy" },
-      { category: "PNS", name: "Sympathectomy/Endoscopic Thoracic Sympathectomy" },
+      { category: "PNS", name: "Sympathectomy: Endoscopic Thoracic Sympathectomy" },
       { category: "PNS", name: "Neurectomy" },
       { category: "PNS", name: "Axotomy" },
       { category: "PNS", name: "Vagotomy" },
@@ -88,8 +90,8 @@ angular.module('hb.smartcard.factory.Procedure', [])
       { category: "GI/MOUTH", name: "Colectomy" },
       { category: "GI/MOUTH", name: "Hepatectomy" },
       { category: "GI/MOUTH", name: "Cholecystectomy" },
-      { category: "GI/MOUTH", name: "Pancreatectomy/Pancreaticoduodenectomy" },
-      { category: "GI/MOUTH", name: "Gastrostomy:Percutaneous Endoscopic Gastrostomy" },
+      { category: "GI/MOUTH", name: "Pancreatectomy: Pancreaticoduodenectomy" },
+      { category: "GI/MOUTH", name: "Gastrostomy: Percutaneous Endoscopic Gastrostomy" },
       { category: "GI/MOUTH", name: "Gastroduodenostomy" },
       { category: "GI/MOUTH", name: "Gastroenterostomy" },
       { category: "GI/MOUTH", name: "Ileostomy" },
@@ -100,8 +102,8 @@ angular.module('hb.smartcard.factory.Procedure', [])
       { category: "GI/MOUTH", name: "Sigmoidostomy" },
       { category: "GI/MOUTH", name: "Uvulotomy" },
       { category: "GI/MOUTH", name: "Myotomy" },
-      { category: "GI/MOUTH", name: "Myotomy:Heller Myotomy" },
-      { category: "GI/MOUTH", name: "Myotomy:Pyloromyotomy" },
+      { category: "GI/MOUTH", name: "Myotomy: Heller Myotomy" },
+      { category: "GI/MOUTH", name: "Myotomy: Pyloromyotomy" },
       { category: "GI/MOUTH", name: "Anal Sphincterotomy" },
       { category: "GI/MOUTH", name: "Lateral Internal Sphincterotomy" },
       { category: "GI/MOUTH", name: "Vertical Banded Gastroplasty" },
@@ -170,10 +172,10 @@ angular.module('hb.smartcard.factory.Procedure', [])
       { category: "BONE", name: "Khyphoplasty" },
       { category: "BONE", name: "Mentoplasty" },
       { category: "BONE", name: "Ostectomy" },
-      { category: "BONE", name: "Ostectomy:Femoral Head Ostectomy" },
-      { category: "BONE", name: "Ostectomy:Vertebrectomy" },
-      { category: "BONE", name: "Ostectomy:Coccygectomy" },
-      { category: "BONE", name: "Ostectomy:Astragalectomy" },
+      { category: "BONE", name: "Ostectomy: Femoral Head Ostectomy" },
+      { category: "BONE", name: "Ostectomy: Vertebrectomy" },
+      { category: "BONE", name: "Ostectomy: Coccygectomy" },
+      { category: "BONE", name: "Ostectomy: Astragalectomy" },
       { category: "BONE", name: "Corpectomy" },
       { category: "BONE", name: "Facetectomy" },
       { category: "BONE", name: "Laminectomy" },
@@ -192,8 +194,8 @@ angular.module('hb.smartcard.factory.Procedure', [])
       { category: "JOINT", name: "Ulnar Collateral Ligament Reconstruction" },
       { category: "MUSCLE", name: "Bursectomy" },
       { category: "MUSCLE", name: "Amputation" },
-      { category: "MUSCLE", name: "Amputation:Hemicorporectomy" },
-      { category: "MUSCLE", name: "Amputation:Hemipelvectomy" },
+      { category: "MUSCLE", name: "Amputation: Hemicorporectomy" },
+      { category: "MUSCLE", name: "Amputation: Hemipelvectomy" },
       { category: "MUSCLE", name: "Myotomy" },
       { category: "MUSCLE", name: "Tenotomy" },
       { category: "MUSCLE", name: "Fasciotomy" },
@@ -227,7 +229,14 @@ angular.module('hb.smartcard.factory.Procedure', [])
 		    
 		    return x < y ? -1 : x > y ? 1 : 0;
 		};
-		return procedures.sort(comparator);
+		
+		
+		var proceduresRef = ref.child('procedures');
+		var sync = $firebase(proceduresRef);
+		var eventsArray = sync.$asArray();
+		eventsArray.sort(comparator);
+
+		return eventsArray;
 	};
 
 	factory.findAllCategories = function findAllCategories() 
@@ -240,7 +249,8 @@ angular.module('hb.smartcard.factory.Procedure', [])
 			return x < y ? -1 : x > y ? 1 : 0;
 		};
 		
-		var sorted = procedures.sort(comparator);
+		procedures.sort(comparator);
+		var sorted = procedures.slice(0);
 		var category = null;
 		for(var i=0; i<sorted.length; i++) {
 			if(sorted[i].category != category) {
@@ -251,6 +261,69 @@ angular.module('hb.smartcard.factory.Procedure', [])
 		
 		return categories;
 	};
+	
+//	factory.initialize = function initialize() {
+//		var comparator = function(a,b) {
+//			var x = a.name.toLowerCase(), y = b.name.toLowerCase();
+//		    
+//		    return x < y ? -1 : x > y ? 1 : 0;
+//		};
+//		procedures.sort(comparator);
+//		var sorted = procedures.slice(0);
+//		
+//		for(var i=0; i<sorted.length; i++) {
+//			var id = "px:" + i;
+//			px = {
+//				id : id,
+//				name : sorted[i].name,
+//				description : "description",
+//				code : "XXX",
+//				abbr : "XXX",
+//				modified : moment().toJSON(),
+//				modifiedBy : "APP",
+//				category: {
+//					name: sorted[i].category,
+//					id: "pc:"
+//				}
+//			};
+//			ref.child('procedures').child(id).set(angular.fromJson(px));
+//		}
+//	};
+	
+//	factory.initialize = function initialize() {
+//		var categories = [];
+//		
+//		var comparator = function(a,b) {
+//			var x = a.category.toLowerCase(), y = b.category.toLowerCase();
+//			
+//			return x < y ? -1 : x > y ? 1 : 0;
+//		};
+//		
+//		procedures.sort(comparator);
+//		var sorted = procedures.slice(0);
+//		var category = null;
+//		for(var i=0; i<sorted.length; i++) {
+//			if(sorted[i].category != category) {
+//				category = sorted[i].category;
+//				categories.push({name: category});
+//			}
+//		}
+//		
+//		for(var i=0; i<categories.length; i++) {
+//			var id = "cat:" + i;
+//			px = {
+//				id : id,
+//				name : sorted[i].category,
+//				description : "description",
+//				ordinal : -1,
+//				code : "XXX",
+//				abbr : "XXX",
+//				modified : moment().toJSON(),
+//				modifiedBy : "APP",
+//			};
+//			ref.child('categories').child(id).set(angular.fromJson(px));
+//		}
+//	};
 	
 	return factory;
 });

@@ -2,16 +2,16 @@
 	<div class="ui small form">
 		<div class="inline fields">
 			<div class="field">
-				<label>Procedure:</label>
-				<select ng-model="pxCriteria" ng-options="procedure.name for procedure in procedures"></select>
-			</div>
-			<div class="field">
 				<label>Procedure Category: </label>
-				<select ng-model="pxCategory" ng-options="category.name for category in procedureCategories"></select>
+				<select ng-model="pxCategory" ng-options="category.name for category in procedureCategories | orderBy:'name'"></select>
 			</div>
 			<div class="field">
 				<label>Surgeon: </label>
-				<select ng-model="pxSurgeon" ng-options="fullName(surgeon) for surgeon in surgeons"></select>
+				<select ng-model="pxSurgeon" ng-options="fullName(surgeon) for surgeon in surgeons | orderBy:['lastName','firstName','middleInitial']"></select>
+			</div>
+			<div class="field">
+				<label>Procedure:</label>
+				<select ng-model="pxCriteria" ng-options="procedure.name for procedure in procedures | orderBy:'name'"></select>
 			</div>
 			<div class="field">
 				<button ng-click="clearSearch()">Clear</button>
@@ -26,7 +26,7 @@
 				<div class="name">{{title(smartcard)}}</div>
 				<p class="description">{{fullName(smartcard.surgeon)}}</p>
 			</div>
-			<div class="extra">{{smartcard.category}}</div>
+			<div class="extra">{{smartcard.category}}<div style="float: right; margin-right: 2px;"><i title="Clone" class="copy icon"></i><i title="Edit" class="edit icon"></i><i title="Delete" class="trash icon"></i></div></div>
 		</div>
 	</div>
 </div>
