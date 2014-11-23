@@ -1,6 +1,7 @@
 angular.module('hb.smartcard.controller.SmartCard', [])
 
 .controller("SmartCardViewer", [ "$rootScope", "$scope", "$filter", "$firebase", "$log", "$location", "SmartCardFactory", "SurgeonFactory", "ProcedureFactory", function($rootScope, $scope, $filter, $firebase, $log, $location, SmartCardFactory, SurgeonFactory, ProcedureFactory) {
+//	var init = false;
 	$scope.isloaded = false;
 	$scope.defaultWidth = '0px';
 	$scope.gutterWidth = '700px';
@@ -10,7 +11,11 @@ angular.module('hb.smartcard.controller.SmartCard', [])
 	$scope.surgeons = SurgeonFactory.findAll();
 	$scope.procedures = ProcedureFactory.findAll();
 	$scope.procedureCategories = ProcedureFactory.findAllCategories();
-
+	
+	
+//	if(!init) {
+//		ProcedureFactory.initialize();
+//	}
 	
 	$scope.title = function(smartcard) {
 		return smartcard.procedure;

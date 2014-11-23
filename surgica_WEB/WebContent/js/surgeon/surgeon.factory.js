@@ -452,7 +452,12 @@ angular.module('hb.smartcard.factory.Surgeon', [])
 	
 	factory.findAll = function findAll() 
 	{
-		return surgeons;
+		var targetRef = ref.child('surgeons');
+		var sync = $firebase(targetRef);
+		var list = sync.$asArray();
+
+		return list;
+		
 	};
 	
 	return factory;

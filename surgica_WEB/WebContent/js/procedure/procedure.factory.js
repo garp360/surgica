@@ -233,33 +233,26 @@ angular.module('hb.smartcard.factory.Procedure', [])
 		
 		var proceduresRef = ref.child('procedures');
 		var sync = $firebase(proceduresRef);
-		var eventsArray = sync.$asArray();
-		eventsArray.sort(comparator);
+		var pxArray = sync.$asArray();
+		pxArray.sort(comparator);
 
-		return eventsArray;
+		return pxArray;
 	};
 
 	factory.findAllCategories = function findAllCategories() 
 	{
-		var categories = [];
-		
 		var comparator = function(a,b) {
-			var x = a.category.toLowerCase(), y = b.category.toLowerCase();
+			var x = a.name.toLowerCase(), y = b.name.toLowerCase();
 			
 			return x < y ? -1 : x > y ? 1 : 0;
 		};
 		
-		procedures.sort(comparator);
-		var sorted = procedures.slice(0);
-		var category = null;
-		for(var i=0; i<sorted.length; i++) {
-			if(sorted[i].category != category) {
-				category = sorted[i].category;
-				categories.push({name: category});
-			}
-		}
-		
-		return categories;
+		var categoriesRef = ref.child('categories');
+		var sync = $firebase(categoriesRef);
+		var catArray = sync.$asArray();
+		catArray.sort(comparator);
+
+		return catArray;
 	};
 	
 //	factory.initialize = function initialize() {
@@ -313,7 +306,7 @@ angular.module('hb.smartcard.factory.Procedure', [])
 //			var id = "cat:" + i;
 //			px = {
 //				id : id,
-//				name : sorted[i].category,
+//				name : categories[i].name,
 //				description : "description",
 //				ordinal : -1,
 //				code : "XXX",
