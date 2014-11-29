@@ -56,7 +56,7 @@ DIV.hb-app {
 
 #smartcard_info_window {
 	display: none;
-	width: 690px;
+	width: 290px;
 	right: 28px;
 	top: 108px;
 	bottom: 72px;
@@ -87,6 +87,70 @@ DIV.hb-app {
 	background: -ms-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
 	background: linear-gradient(to bottom, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=0);
+}
+
+.hb-pull-left {
+	clear: both;
+	float: left !important;
+}
+
+.hb-pull-right {
+	clear: both;
+	float: right !important;
+}
+
+.hb-toolbar {
+	top: 50px;
+	left: 8px;
+	right: 8px;
+	height: 45px;
+}
+
+.hb-form-button-bar {
+	padding: 8px;
+	overflow: hidden;
+	background: rgba(204, 204, 204, 1);
+	background: rgba(226, 226, 226, 1);
+	background: -moz-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(226, 226, 226, 1)), color-stop(68%, rgba(209, 209, 209, 1)), color-stop(100%, rgba(254, 254, 254, 1)));
+	background: -webkit-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	background: -o-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	background: -ms-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	background: linear-gradient(to bottom, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=0);
+}
+
+.hb-toolbar-bkg {
+	overflow: hidden;
+	background: rgba(204, 204, 204, 1);
+	background: rgba(226, 226, 226, 1);
+	background: -moz-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(226, 226, 226, 1)), color-stop(68%, rgba(209, 209, 209, 1)), color-stop(100%, rgba(254, 254, 254, 1)));
+	background: -webkit-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	background: -o-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	background: -ms-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	background: linear-gradient(to bottom, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=0);
+}
+
+.hb-view {
+	top: 98px;
+	left: 8px;
+	bottom: 60px;
+	right: 8px;
+}
+
+.ui.form input[type="text"].hb-name {
+	width: 14em;
+}
+.ui.form input[type="text"].hb-initial {
+	width: 3em;
+}
+
+.ui.form.manage-surgeon label {
+	width:10em !important;
+	text-align: right;
+	padding-right:2px;
 }
 
 .ui.form input[type="text"],
