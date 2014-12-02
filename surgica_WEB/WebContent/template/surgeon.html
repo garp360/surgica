@@ -1,25 +1,21 @@
 <div ng-show="!isloaded">Loading</div>
 <div ng-show="isloaded">
-	<div class="hb-app hb-toolbar hb-toolbar-bkg hb-pull-right" id="surgeon_toolbar">
-		<div class="ui small form hb-pull-right">
-			<div class="inline fields">
-				<div class="field">
+	<div class="hb-app hb-view" id="surgeon_viewer">
+		<div class="ui small form hb-toolbar-bkg" style="width:100%;border-bottom:1px solid #bbbbbb;position:absolute;top:0px;left:0px;padding-top:8px;">
+			<div class="inline fields" style="width:100%;">
+				<div class="field hb-pull-right">
 					<button ng-click="create()">New</button>
-				</div>
-				<div class="field">
 					<button ng-show="surgeon.id != null" ng-click="clone(surgeon.id)">Clone</button>
-				</div>
-				<div class="field">
 					<button ng-click="find()">Find</button>
-				</div>
-				<div class="field">
 					<button ng-click="import()">Import</button>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="hb-app hb-view" id="surgeon_viewer">
 		<div class="ui small form manage-surgeon">
+			<h2 class="ui horizontal header divider">
+			    <i class="bar chart icon"></i>
+			    Surgeon Demographis
+			 </h2>
 			<div class="inline field">
 				<label>First Name: </label> <input type="text" class="hb-name" ng-model="form.firstName" />
 			</div>
@@ -30,11 +26,39 @@
 				<label>Middle Initial: </label> <input type="text" class="hb-initial" ng-model="form.middleInitial" />
 			</div>
 			<div class="inline field">
+				<label>Title: </label> <input type="text" class="hb-uuid" ng-model="form.title" />
+			</div>
+			<div class="inline field">
 				<label>Specialty: </label> <select ng-model="form.specialty" ng-options="specialty.name for specialty in specialties | orderBy:'name'"></select>
 			</div>
 			<div class="inline field">
 				<label>Facility: </label> <select ng-model="form.facility" ng-options="facility.name for facility in facilities | orderBy:'name'"></select>
 			</div>
+			<div class="inline field">
+				<label>Date of Birth: </label> <input type="text" class="hb-date" ng-model="form.dob" />
+			</div>
+			<div class="inline field">
+				<label>Date of Birth: </label> <input type="text" class="hb-uuid" ng-model="form.dob" />
+			</div>
+			<div class="inline field">
+				<label>SSN: </label> <input type="text" class="hb-uuid" ng-model="form.pid" />
+			</div>
+			
+			
+			 address
+ contactInfo
+ dob: 
+ firstName: 
+ id: 
+ lastName: 
+ middleInitial: 
+ modified: 
+ modifiedBy: 
+ pid: 
+ ssNumber: 
+ title: 
+ username: 
+			
 		</div>
 		<div class="ui small form hb-toolbar-bkg" style="width:100%;border-top:1px solid #bbbbbb;position:absolute;bottom:0px;right:0px;padding-top:8px;">
 			<div class="inline fields" style="width:100%;">

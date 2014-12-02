@@ -48,6 +48,13 @@ DIV.hb-app {
 	right: 8px;
 }
 
+#surgeon_viewer {
+	top: 8px;
+	left: 8px;
+	bottom: 60px;
+	right: 8px;
+}
+
 #smartcard_tray {
 	position: absolute;
 	bottom: 20px;
@@ -145,6 +152,10 @@ DIV.hb-app {
 }
 .ui.form input[type="text"].hb-initial {
 	width: 3em;
+}
+
+.ui.form.manage-surgeon {
+	margin-top: 50px;
 }
 
 .ui.form.manage-surgeon label {

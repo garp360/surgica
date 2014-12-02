@@ -26,5 +26,16 @@ angular.module('hb.smartcard.factory.Facility', [])
 		return items;
 	};
 
+	factory.findById = function findById(facilityId) {
+		var item = {};
+		new Firebase("https://surgica.firebaseio.com/facility/facilities/" + facilityId).once('value', function(snap) {
+			item = snap.val();
+		});
+
+		return item;
+
+	};
+
 	return factory;
+
 });

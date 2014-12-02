@@ -1,9 +1,9 @@
 angular.module('hb.smartcard.factories', 
 		['hb.smartcard.factory.SmartCard', 
-          'hb.smartcard.factory.Surgeon', 
           'hb.smartcard.factory.Specialty', 
           'hb.smartcard.factory.Procedure', 
           'hb.smartcard.factory.InventoryPool',
           'hb.smartcard.factory.InventoryType',
-          'hb.smartcard.factory.Facility'
+          'hb.smartcard.factory.Facility',
+          'hb.smartcard.factory.Surgeon'
           ]);

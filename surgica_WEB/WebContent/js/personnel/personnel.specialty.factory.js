@@ -23,6 +23,15 @@ angular.module('hb.smartcard.factory.Specialty', [])
 		
 		return list;
 	};
+	
+	factory.findById = function findById(id) {
+		var obj = {};
+		new Firebase("https://surgica.firebaseio.com/personnel/specialties/" + id).once('value', function(snap) {
+			obj = snap.val();
+		});
+
+		return obj;
+	};
 
 	return factory;
 });
