@@ -22,29 +22,60 @@ angular.module('hb.smartcard.factory.Surgeon', [])
 
 		return list;
 	};
+
+	factory.findById = function findById(surgeonId) 
+	{
+		return __findById(surgeonId);
+	};
 	
 	factory.create = function create(surgeon) {
 		$log.info("Creating 'Surgeon'");
+		return this.load;
 	};
 	
 	factory.update = function update(surgeon) {
-		var facility = FacilityFactory.findById(surgeon.facility.id);
-		var specialty = SpecialtyFactory.findById(surgeon.specialty.id);
+		var deferred = $q.defer();
+		var facility = FacilityFactory.findById(surgeon.facilityId);
+		var specialty = SpecialtyFactory.findById(surgeon.specialtyId);
+		var surgeonId = surgeon.id;
 
-		$log.info("Updating 'Surgeons' (id=[" + surgeon.id + "])");
+		$log.info("Updating 'Surgeons' (id=[" + surgeonId + "])");
 
-		ref.child('surgeons').child(surgeon.id).update({
-			facilityId : surgeon.facility.id,
+		ref.child('surgeons').child(surgeonId).update({
+			facilityId : facility.id,
 			facility : facility,
 			firstName : surgeon.firstName,
 			lastName : surgeon.lastName,
 			middleInitial : surgeon.middleInitial,
 			modified : moment().toJSON(),
 			modifiedBy : "APP",
-			specialtyId : surgeon.specialty.id,
-			specialty : specialty
+			specialtyId : specialty.id,
+			specialty : specialty,
+			dob : moment(surgeon.dob).toJSON(),
+			ssNumber : surgeon.ssNumber
+		}, function(error) {
+			  if (error) {
+				  deferred.reject(error);
+			  } else {
+				  __findById(surgeonId).then(function(surgeon) {
+					  deferred.resolve(surgeon);					  
+				  }, function(error) {
+					  deferred.reject(error);					  
+				  });
+			  };
 		});
+		
+		return deferred.promise;
 	};
 
+	function __findById(surgeonId) 
+	{
+		var targetRef = ref.child('surgeons').child(surgeonId);
+		var sync = $firebase(targetRef);
+		var obj = sync.$asObject();
+		
+		return obj.$loaded();
+	};
+	
 	return factory;
 });

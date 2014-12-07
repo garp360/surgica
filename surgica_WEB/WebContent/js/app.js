@@ -19,3 +19,9 @@ app.config(function($routeProvider) {
 });
 
 $('.ui.dropdown').dropdown();
+
+$( '.manageSurgeonView' ).scroll(function() {
+	$( '#manageSurgeonFooter' ).css('position','absolute');
+	$( '#manageSurgeonFooter' ).css('bottom','0px');
+	$( '#manageSurgeonFooter' ).css('left','0px');
+});

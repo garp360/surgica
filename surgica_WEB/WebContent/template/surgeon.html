@@ -1,75 +1,228 @@
 <div ng-show="!isloaded">Loading</div>
 <div ng-show="isloaded">
-	<div class="hb-app hb-view" id="surgeon_viewer">
-		<div class="ui small form hb-toolbar-bkg" style="width:100%;border-bottom:1px solid #bbbbbb;position:absolute;top:0px;left:0px;padding-top:8px;">
-			<div class="inline fields" style="width:100%;">
-				<div class="field hb-pull-right">
-					<button ng-click="create()">New</button>
-					<button ng-show="surgeon.id != null" ng-click="clone(surgeon.id)">Clone</button>
-					<button ng-click="find()">Find</button>
-					<button ng-click="import()">Import</button>
+	<div class="hb-view" id="surgeon_viewer">
+	<table height="100%" width="100%" cellpadding="0" cellspacing="0">
+		<tr height="40" class="hb toolbar top">
+			<td class="hb toolbar">
+				<table>
+					<colgroup>
+						<col />
+						<col />
+					</colgroup>
+					<tbody>
+						<tr>
+							<td class="hb toolbar left"></td>
+							<td class="hb toolbar right">
+								<button ng-click="create()">New</button>
+								<button ng-show="surgeon.id != null" ng-click="clone(surgeon.id)">Clone</button>
+								<button ng-click="find()">Find</button>
+								<button ng-click="import()">Import</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="hb form panel">
+					<div>
+						<h2 class="ui header">
+							<i class="doctor large icon hb-blue"></i>
+							<div class="content">
+								Surgeon Demographics
+								<div class="sub header">Manage professional data for this Surgeon.</div>
+							</div>
+						</h2>
+						<table>
+							<colgroup>
+								<col />
+								<col width="30"/>
+								<col />
+							</colgroup>
+							<tbody>
+							<tr>
+								<td>
+									<div>
+										<table class="hb form">
+											<tr>
+												<td><label>First Name</label></td>
+												<td><label>Last Name</label></td>
+												<td><label>Middle Initial</label></td>
+											</tr>
+											<tr>
+												<td><input type="text" class="hb-name" ng-model="form.firstName" /></td>
+												<td><input type="text" class="hb-name" ng-model="form.lastName" /></td>
+												<td><input type="text" class="hb-initial" ng-model="form.middleInitial" /></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<table class="hb form">
+											<tr>
+												<td><label>Specialty</label></td>
+											</tr>
+											<tr>
+												<td><select ng-model="form.specialty" ng-options="specialty.name for specialty in specialties | orderBy:'name'"></select></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<table class="hb form">
+											<tr>
+												<td><label>Facility</label></td>
+											</tr>
+											<tr>
+												<td><select ng-model="form.facility" ng-options="facility.name for facility in facilities | orderBy:'name'"></select></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<table class="hb form">
+											<tr>
+												<td><label>Date of Birth</label></td>
+											</tr>
+											<tr>
+												<td><input type="text" class="hb-date" ng-model="form.dob" /></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<table class="hb form">
+											<tr>
+												<td><label>SSN</label></td>
+											</tr>
+											<tr>
+												<td><input type="text" class="hb-uuid" ng-model="form.ssNumber" /></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</table>	
+						<h5 class="ui header">
+							<i class="home large icon hb-blue"></i>
+							<div class="content" style="width:584px;padding:4px;border-bottom:1px solid #b2b2b2;">
+								Addresses<button style="float:right;" ng-show="showAddAddress(address)" ng-click="addAddress()">Add Address</button> 
+							</div>
+						</h5>
+						<table ng-repeat="address in addresses" style="margin-bottom:10px;">
+							<tr>
+								<td>
+									<div>
+										<table class="hb form">
+											<tr>
+												<td><label>Street 1</label></td>
+											</tr>
+											<tr>
+												<td><input type="text" /></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<table class="hb form">
+											<tr>
+												<td><label>Street 2</label></td>
+											</tr>
+											<tr>
+												<td><input type="text" /></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<table class="hb form">
+											<tr>
+												<td><label>Street </label></td>
+											</tr>
+											<tr>
+												<td><input type="text" /></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<table class="hb form">
+											<tr>
+												<td><label>Country</label></td>
+											</tr>
+											<tr>
+												<td><input type="text" /></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<table class="hb form">
+											<tr>
+												<td><label>City</label></td>
+												<td><label>State</label></td>
+												<td><label>Zip</label></td>
+											</tr>
+											<tr>
+												<td><input type="text" /></td>
+												<td><input type="text" /></td>
+												<td><input type="text" /></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
 				</div>
-			</div>
-		</div>
-		<div class="ui small form manage-surgeon">
-			<h2 class="ui horizontal header divider">
-			    <i class="bar chart icon"></i>
-			    Surgeon Demographis
-			 </h2>
-			<div class="inline field">
-				<label>First Name: </label> <input type="text" class="hb-name" ng-model="form.firstName" />
-			</div>
-			<div class="inline field">
-				<label>Last Name: </label> <input type="text" class="hb-name" ng-model="form.lastName" />
-			</div>
-			<div class="inline field">
-				<label>Middle Initial: </label> <input type="text" class="hb-initial" ng-model="form.middleInitial" />
-			</div>
-			<div class="inline field">
-				<label>Title: </label> <input type="text" class="hb-uuid" ng-model="form.title" />
-			</div>
-			<div class="inline field">
-				<label>Specialty: </label> <select ng-model="form.specialty" ng-options="specialty.name for specialty in specialties | orderBy:'name'"></select>
-			</div>
-			<div class="inline field">
-				<label>Facility: </label> <select ng-model="form.facility" ng-options="facility.name for facility in facilities | orderBy:'name'"></select>
-			</div>
-			<div class="inline field">
-				<label>Date of Birth: </label> <input type="text" class="hb-date" ng-model="form.dob" />
-			</div>
-			<div class="inline field">
-				<label>Date of Birth: </label> <input type="text" class="hb-uuid" ng-model="form.dob" />
-			</div>
-			<div class="inline field">
-				<label>SSN: </label> <input type="text" class="hb-uuid" ng-model="form.pid" />
-			</div>
-			
-			
-			 address
- contactInfo
- dob: 
- firstName: 
- id: 
- lastName: 
- middleInitial: 
- modified: 
- modifiedBy: 
- pid: 
- ssNumber: 
- title: 
- username: 
-			
-		</div>
-		<div class="ui small form hb-toolbar-bkg" style="width:100%;border-top:1px solid #bbbbbb;position:absolute;bottom:0px;right:0px;padding-top:8px;">
-			<div class="inline fields" style="width:100%;">
-				<div class="field hb-pull-left" style="margin-left:6px;">
-					<button ng-click="reset()">Reset</button>
-				</div>
-				<div class="field hb-pull-right">
-					<button ng-show="surgeon.id != null" ng-click="delete(surgeon.id)">Delete</button>
-					<button ng-click="save()">Save</button>
-				</div>
-			</div>
-		</div>
+			</td>
+		</tr>
+		<tr height="40" class="hb toolbar bottom">
+			<td class="hb toolbar">
+				<table>
+					<colgroup>
+						<col />
+						<col />
+					</colgroup>
+					<tbody>
+						<tr>
+							<td class="hb toolbar left">
+								<button ng-click="reset()">Reset</button>
+							</td>
+							<td class="hb toolbar right">
+								<button ng-show="surgeon.id != null" ng-click="delete(surgeon.id)">Delete</button>
+								<button ng-click="save()">Save</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</table>
 	</div>
 </div>

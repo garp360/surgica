@@ -19,6 +19,11 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a85c7', endColorstr='#3272b3', GradientType=0);
 }
 
+table {
+	padding: 0px;
+	bord
+}
+
 DIV.hb-app {
 	position: absolute;
 	padding: 10px;
@@ -41,11 +46,38 @@ DIV.hb-app {
 	box-sizing: border-box;
 }
 
+DIV.hb-view {
+	position: absolute;
+	background-color: #FFFFFF;
+	overflow: hidden;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	outline: none;
+	color: rgba(0, 0, 0, 0.7);
+	border-radius: 0.3125em;
+	-webkit-transition: background-color 0.3s ease-out, -webkit-box-shadow 0.2s ease, border-color 0.2s ease;
+	-moz-transition: background-color 0.3s ease-out, box-shadow 0.2s ease, border-color 0.2s ease;
+	transition: background-color 0.3s ease-out, box-shadow 0.2s ease, border-color 0.2s ease;
+	-webkit-box-shadow: 0em 0em 0em 0em rgba(0, 0, 0, 0.3) inset;
+	box-shadow: 0em 0em 0em 0em rgba(0, 0, 0, 0.3) inset;
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+DIV.hb-view { 
+	background-colr: #ffffff;
+}
+
+
 #smartcard_viewer {
 	top: 98px;
 	left: 8px;
 	bottom: 60px;
 	right: 8px;
+	
 }
 
 #surgeon_viewer {
@@ -127,8 +159,38 @@ DIV.hb-app {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=0);
 }
 
-.hb-toolbar-bkg {
-	overflow: hidden;
+.hb.form.panel {
+	height:100%;
+	width:100%;
+	overflow:auto !important;
+}
+
+.hb.form.panel > div {
+	padding: 8px 30px;
+}
+
+.hb.form.panel > table {
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	outline: none;
+	color: rgba(0, 0, 0, 0.7);
+	border-radius: 0.3125em;
+	-webkit-transition: background-color 0.3s ease-out, -webkit-box-shadow 0.2s ease, border-color 0.2s ease;
+	-moz-transition: background-color 0.3s ease-out, box-shadow 0.2s ease, border-color 0.2s ease;
+	transition: background-color 0.3s ease-out, box-shadow 0.2s ease, border-color 0.2s ease;
+	-webkit-box-shadow: 0em 0em 0em 0em rgba(0, 0, 0, 0.3) inset;
+	box-shadow: 0em 0em 0em 0em rgba(0, 0, 0, 0.3) inset;
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	background: rgba(243, 243, 243, 1);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=0);
+}
+
+.hb.toolbar.top {
+	border-bottom: 1px solid #cfcfcf;
 	background: rgba(204, 204, 204, 1);
 	background: rgba(226, 226, 226, 1);
 	background: -moz-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
@@ -140,37 +202,66 @@ DIV.hb-app {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=0);
 }
 
-.hb-view {
-	top: 98px;
-	left: 8px;
-	bottom: 60px;
-	right: 8px;
+.hb.toolbar.bottom {
+	background: rgba(204, 204, 204, 1);
+	background: rgba(226, 226, 226, 1);
+	background: -moz-linear-gradient(bottom, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	background: -webkit-gradient(left bottom, left top, color-stop(0%, rgba(226, 226, 226, 1)), color-stop(68%, rgba(209, 209, 209, 1)), color-stop(100%, rgba(254, 254, 254, 1)));
+	background: -webkit-linear-gradient(bottom, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	background: -o-linear-gradient(bottom, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	background: -ms-linear-gradient(bottom, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	background: linear-gradient(to top, rgba(226, 226, 226, 1) 0%, rgba(209, 209, 209, 1) 68%, rgba(254, 254, 254, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#e2e2e2', GradientType=0);
 }
 
-.ui.form input[type="text"].hb-name {
+TR.hb.toolbar.top > TD, TR.hb.toolbar.bottom > TD {
+	border-bottom: 1px solid #cfcfcf;
+	padding: 6px 15px;
+}
+
+TR.hb.toolbar.top > TD {
+	border-bottom: 1px solid #cfcfcf;
+}
+
+TR.hb.toolbar.bottom > TD {
+	border-top: 1px solid #cfcfcf;
+	padding: 6px 15px;
+}
+
+TD.hb.toolbar > table {
+	position:relative;
+	table-layout: fixed;
+	width: 100%;
+}
+
+.hb.toolbar.left {
+	text-align: left;
+	padding-left: 10px;
+}
+
+.hb.toolbar.right {
+	text-align: right;
+	padding-right: 10px;
+}
+
+.hb.form input[type="text"].hb-name {
 	width: 14em;
 }
-.ui.form input[type="text"].hb-initial {
+.hb.form input[type="text"].hb-initial {
 	width: 3em;
 }
 
-.ui.form.manage-surgeon {
-	margin-top: 50px;
+.hb.form.manage-surgeon {
+	margin: 20px;
 }
 
-.ui.form.manage-surgeon label {
-	width:10em !important;
-	text-align: right;
-	padding-right:2px;
-}
-
-.ui.form input[type="text"],
-.ui.form button,
-.ui.form button:hover,
-.ui.form button:active,
-.ui.form select {
+.hb.form input[type="text"],
+.hb.form button,
+.hb.form button:hover,
+.hb.form button:active,
+.hb.form select {
 	margin: 0em;
-	padding: 0.3em 1em;
+	padding: 0.3em 0.7em;
 	font-size: 1em;
 	background-color: #FFFFFF;
 	border: 1px solid rgba(0, 0, 0, 0.375);
@@ -191,7 +282,7 @@ DIV.hb-app {
 }
 
 
-.ui.form button:hover {
+.hb.form button:hover {
 	background:-moz-linear-gradient( center top, #f6f6f6 5%, #ffffff 100% );
 	background:-ms-linear-gradient( top, #f6f6f6 5%, #ffffff 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff');
@@ -199,26 +290,41 @@ DIV.hb-app {
 	background-color:#f6f6f6;
 }
 
-.ui.form button:active {
+.hb.form button:active {
 	position:relative;
 	top:1px;
 }
 
-.ui.form button,
-.ui.form button:hover,
-.ui.form button:active,
-.ui.form select {
-	padding: 0.2em 1em;
+.hb.form button,
+.hb.form button:hover,
+.hb.form button:active,
+.hb.form select {
+	padding: 0.2em 0.7em;
 }
 
-.ui.form input[type="text"]:focus {
+.hb.form select {
+	height:1.875em;
+}
+
+.hb.form label {
+	color: #333333;
+	font-size: .9em;
+	font-weight: 600;
+}
+
+.hb.form input[type="text"]:focus,
+.hb.form select:focus {
 	color: rgba(0, 0, 0, 0.85);
 	border-color: rgba(0, 0, 0, 0.375);
 	border-bottom-left-radius: 0;
 	border-top-left-radius: 0;
 	-webkit-appearance: none;
-	-webkit-box-shadow: 0.5em 0em 0em 0em rgba(24, 73, 199, 0.9) inset;
-	box-shadow: 0.5em 0em 0em 0em rgba(24, 73, 199, 0.9) inset;
+	-webkit-box-shadow: 0.3em 0em 0em 0em rgba(24, 73, 199, 0.9) inset;
+	box-shadow: 0.3em 0em 0em 0em rgba(24, 73, 199, 0.9) inset;
+}
+
+.hb-blue {
+	color: #3266B2;
 }
 
 .ui.input.focus input,.ui.input input:focus {
@@ -234,7 +340,7 @@ DIV.hb-app {
 	color: #AAAAAA;
 }
 
-.ui.form .field>label {
+.hb.form .field>label {
 	color: #333333;
 	font-size: 1em;
 	font-weight: bold;

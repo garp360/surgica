@@ -12,8 +12,27 @@ angular.module('hb.smartcard.controller.Surgeon', [])
 	$scope.facilities = [];
 	$scope.surgeon = {};
 	$scope.form = {};
+	$scope.addresses = [];
 	
+	$scope.addAddress = function() {
+		var count = $scope.form.address.length+1;
+		
+		$scope.addresses.push({
+			  ordinal : count,
+	          city : "",
+	          country : "",
+	          state : "",
+	          street1 : "",
+	          street2 : "",
+	          street3 : "",
+	          zip : ""
+	        });
+	};
 	
+	$scope.showAddAddress = function(address) {
+		return address.ordinal === $scope.addresses[$scope.addresses.length-1].ordinal;
+	};
+		
 	SurgeonFactory.load().then(function(surgeonsList){
 		SpecialtyFactory.load().then(function(specialtiesList){
 			FacilityFactory.load().then(function(facilitiesList){
@@ -28,35 +47,72 @@ angular.module('hb.smartcard.controller.Surgeon', [])
 	});
 	
 	$scope.find = function() {
-		$scope.surgeon = $scope.surgeons[33];
-		$scope.form = $scope.surgeon;
-	}
+		SurgeonFactory.findById($scope.surgeons[33].id).then(function(surgeon) {
+			init(surgeon);
+ 		}, function(error) {
+			$log.debug("Error loading Surgeon");
+		});
+	};
 
 	$scope.reset = function() {
 		if($scope.surgeon.id == null) {
 			$scope.form = {};
+			$scope.form.specialty = null;
+			$scope.form.facility = null;
+			$scope.addresses = [];
 		} else {
-			$scope.form = angular.copy($scope.surgeon);
+			init($scope.surgeon);
 		}
-	}
+	};
 	
 	$scope.save = function() {
-		var surgeon = transform();
+		$scope.isloaded = false;
 		if($scope.surgeon.id == null) {
-			SurgeonFactory.create(transform());
+			SurgeonFactory.create(transform()).then(function(surgeonsList) {
+				$scope.isloaded = true;
+				$scope.surgeons = surgeonsList;
+			});
 		} else {
-			SurgeonFactory.update(transform());
+			SurgeonFactory.update(transform()).then(function(surgeon) {
+				$scope.isloaded = true;
+				$scope.surgeon = surgeon;
+				$scope.form = $scope.surgeon;
+				
+				$scope.form.specialty = $scope.specialties[findIndex($scope.specialties, surgeon.specialtyId)];
+				$scope.form.facility = $scope.facilities[findIndex($scope.facilities, surgeon.facilityId)];
+			});
 		}
+	};
+
+	function init(surgeon) {
+		$scope.surgeon = surgeon;
+		$scope.form = angular.copy($scope.surgeon);
+		$scope.form.specialty = $scope.specialties[findIndex($scope.specialties, surgeon.specialtyId)];
+		$scope.form.facility = $scope.facilities[findIndex($scope.facilities, surgeon.facilityId)];
+		$scope.addresses = surgeon.address.alt == null ? [] : surgeon.address.alt;
+		
+		$scope.addresses.push(getAddress($scope.addresses.length));
 	}
 	
-
+	function getAddress(ordinal) {
+		return {
+		  ordinal : ordinal,
+          city : "",
+          country : "",
+          state : "",
+          street1 : "",
+          street2 : "",
+          street3 : "",
+          zip : ""
+        };
+	}
+	
 	function transform() {
 		var surgeon = {
 			address : $scope.surgeon.address,
 			contactInfo : $scope.surgeon.contactInfo,
-			dob : $scope.surgeon.dob,
+			dob : $scope.form.dob,
 			facilityId : $scope.form.facility.id,
-			facility : $scope.form.facility,
 			firstName : $scope.form.firstName,
 			id : $scope.surgeon.id,
 			lastName : $scope.form.lastName,
@@ -65,13 +121,28 @@ angular.module('hb.smartcard.controller.Surgeon', [])
 			modifiedBy : "APP",
 			pid : $scope.surgeon.pid,
 			specialtyId : $scope.form.specialty.id,
-			specialty : $scope.form.specialty,
-			ssNumber : $scope.surgeon.ssNumber,
+			ssNumber : $scope.form.ssNumber,
 			title : $scope.surgeon.title,
 			username : $scope.surgeon.username
 		};
 		
 		return surgeon;
-	}
+	};
+	
+	function findIndex(arr, id) {
+		var index = null;
+		for(var i=0; i<arr.length; i++) {
+			if(arr[i].id === id) {
+				index = i;
+				break;
+			};
+		}
+		return index;
+	};
+	
+	function formatDate(timestamp) {
+		var mDate = moment(timestamp).format("MM/dd/YYYY");
+		return mDate;
+	};
 	
 }]);
