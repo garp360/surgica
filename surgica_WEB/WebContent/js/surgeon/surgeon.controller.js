@@ -2,46 +2,64 @@ angular.module('hb.smartcard.controller.Surgeon', [])
 
 .controller("SurgeonManager", [ "$rootScope", "$scope", "$filter", 
                                 "$firebase", "$log", "$location", "SurgeonFactory", 
-                                "SpecialtyFactory", "FacilityFactory",
+                                "SpecialtyFactory", "FacilityFactory", "LookupFactory",
                                 function($rootScope, $scope, $filter, 
                                 		$firebase, $log, $location, SurgeonFactory, 
-                                		SpecialtyFactory, FacilityFactory) {
+                                		SpecialtyFactory, FacilityFactory, LookupFactory) {
 	$scope.isloaded = false;
 	$scope.surgeons = [];
 	$scope.specialties = [];
 	$scope.facilities = [];
+	$scope.usStates = [];
+	$scope.countries = [];
 	$scope.surgeon = {};
 	$scope.form = {};
 	$scope.addresses = [];
+	$scope.activeAddress = {}
+	
+	$scope.taddress1 = "700 N Edenbridge Way";
+	$scope.taddress2 = "";
+	$scope.taddress3 = "";
+	$scope.tcountry = "United States";
+	$scope.tcity = "Saint Augustine";
+	$scope.tstate = "Florida";
+	$scope.tzip = "32092";
+	$scope.tprimary = false;
+	
 	
 	$scope.addAddress = function() {
-		var count = $scope.form.address.length+1;
+		var count = $scope.addresses.length + 1;
 		
 		$scope.addresses.push({
 			  ordinal : count,
-	          city : "",
-	          country : "",
-	          state : "",
-	          street1 : "",
-	          street2 : "",
-	          street3 : "",
-	          zip : ""
+			  primary : false,
+	          city : $scope.form.city,
+	          country : $scope.form.country,
+	          state : $scope.form.state,
+	          street1 : $scope.form.street1,
+	          street2 : $scope.form.street2,
+	          street3 : $scope.form.street3,
+	          zip : $scope.form.zip
 	        });
 	};
 	
-	$scope.showAddAddress = function(address) {
-		return address.ordinal === $scope.addresses[$scope.addresses.length-1].ordinal;
-	};
-		
 	SurgeonFactory.load().then(function(surgeonsList){
 		SpecialtyFactory.load().then(function(specialtiesList){
 			FacilityFactory.load().then(function(facilitiesList){
-				$scope.isloaded = true;
-				$scope.surgeons = surgeonsList;
-				$scope.specialties = specialtiesList;
-				$scope.facilities = facilitiesList;
-				$scope.form.specialty = $scope.specialties[0];
-				$scope.form.facility = $scope.facilities[0];
+				LookupFactory.US_STATES().then(function(usStates){
+					LookupFactory.LEGAL_COUNTRIES().then(function(countries){
+						$scope.isloaded = true;
+						$scope.surgeons = surgeonsList;
+						$scope.specialties = specialtiesList;
+						$scope.facilities = facilitiesList;
+						$scope.usStates = usStates;
+						$scope.countries = countries;
+						$scope.form.country = $scope.countries[0];
+						$scope.form.state = $scope.usStates[0];
+						$scope.form.specialty = $scope.specialties[0];
+						$scope.form.facility = $scope.facilities[0];
+					});
+				});
 			});
 		});
 	});
@@ -59,6 +77,8 @@ angular.module('hb.smartcard.controller.Surgeon', [])
 			$scope.form = {};
 			$scope.form.specialty = null;
 			$scope.form.facility = null;
+			$scope.form.country = null;
+			$scope.form.state = null;
 			$scope.addresses = [];
 		} else {
 			init($scope.surgeon);
@@ -90,8 +110,9 @@ angular.module('hb.smartcard.controller.Surgeon', [])
 		$scope.form.specialty = $scope.specialties[findIndex($scope.specialties, surgeon.specialtyId)];
 		$scope.form.facility = $scope.facilities[findIndex($scope.facilities, surgeon.facilityId)];
 		$scope.addresses = surgeon.address.alt == null ? [] : surgeon.address.alt;
-		
 		$scope.addresses.push(getAddress($scope.addresses.length));
+		$scope.addresses = [];
+		$scope.activeAddress = {}
 	}
 	
 	function getAddress(ordinal) {

@@ -119,85 +119,96 @@
 						<h5 class="ui header">
 							<i class="home large icon hb-blue"></i>
 							<div class="content" style="width:584px;padding:4px;border-bottom:1px solid #b2b2b2;">
-								Addresses<button style="float:right;" ng-show="showAddAddress(address)" ng-click="addAddress()">Add Address</button> 
+								Addresses<button style="float:right;" ng-click="addAddress()">Add Address</button> 
 							</div>
 						</h5>
-						<table ng-repeat="address in addresses" style="margin-bottom:10px;">
-							<tr>
-								<td>
-									<div>
-										<table class="hb form">
-											<tr>
-												<td><label>Street 1</label></td>
-											</tr>
-											<tr>
-												<td><input type="text" /></td>
-											</tr>
-										</table>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div>
-										<table class="hb form">
-											<tr>
-												<td><label>Street 2</label></td>
-											</tr>
-											<tr>
-												<td><input type="text" /></td>
-											</tr>
-										</table>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div>
-										<table class="hb form">
-											<tr>
-												<td><label>Street </label></td>
-											</tr>
-											<tr>
-												<td><input type="text" /></td>
-											</tr>
-										</table>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div>
-										<table class="hb form">
-											<tr>
-												<td><label>Country</label></td>
-											</tr>
-											<tr>
-												<td><input type="text" /></td>
-											</tr>
-										</table>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div>
-										<table class="hb form">
-											<tr>
-												<td><label>City</label></td>
-												<td><label>State</label></td>
-												<td><label>Zip</label></td>
-											</tr>
-											<tr>
-												<td><input type="text" /></td>
-												<td><input type="text" /></td>
-												<td><input type="text" /></td>
-											</tr>
-										</table>
-									</div>
-								</td>
-							</tr>
+						<table style="margin-bottom:10px;">
+							<tbody>
+								<tr>
+									<td>
+										<div>
+											<table class="hb form">
+												<tr>
+													<td><label>Street 1</label></td>
+												</tr>
+												<tr>
+													<td><input type="text" ng-model="form.street1" /></td>
+												</tr>
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div>
+											<table class="hb form">
+												<tr>
+													<td><label>Street 2</label></td>
+												</tr>
+												<tr>
+													<td><input type="text" ng-model="form.street2" /></td>
+												</tr>
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div>
+											<table class="hb form">
+												<tr>
+													<td><label>Street </label></td>
+												</tr>
+												<tr>
+													<td><input type="text" ng-model="form.street3" /></td>
+												</tr>
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div>
+											<table class="hb form">
+												<tr>
+													<td><label>Country</label></td>
+												</tr>
+												<tr>
+													<td><select ng-model="form.country" ng-options="country.name for country in countries | orderBy:'name'"></select></td>
+												</tr>
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div>
+											<table class="hb form">
+												<tr>
+													<td><label>City</label></td>
+													<td><label>State</label></td>
+													<td><label>Zip</label></td>
+												</tr>
+												<tr>
+													<td><input type="text" ng-model="form.city"/></td>
+													<td><select ng-model="form.state" ng-options="state.name for state in usStates | orderBy:'value'"></select></td>
+													<td><input type="text" ng-model="form.zip"/></td>
+												</tr>
+											</table>
+										</div>
+									</td>
+								</tr>
+							</tbody>
 						</table>
+						<div class="ui items">
+							<div class="item address" ng-repeat="address in addresses | orderBy:'ordinal'">
+								<div class="content">
+									<div class="name">{{address.street1}}<br/>{{address.street2}}<br/>{{address.street3}}
+									<br />{{address.country.name}}<br />{{address.city}}, {{address.state.value}} {{address.zip}}</div>
+								</div>
+								<div class="extra">{{tprimary}}<div style="float: right; margin-right: 2px;"><i title="Edit" class="edit icon"></i><i title="Delete" class="trash icon"></i></div></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</td>
